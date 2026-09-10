@@ -1,8 +1,22 @@
-record1 = " CARTER, DEMARCUS | m | 36 | 2018-03-22 | 412 larkmoor lane | beat 352 | OPEN "
-record2 = " REYES, MIGUEL | M | 32 | 2018-05-17 | 3308 DELAFORD STREET | Beat 347 | OPEN "
-record3 = " OKAFOR, SAMUEL J | M | 55 | 2018-07-09 | 1519 westhollow avenue | beat 341 | OPEN "
-record4 = " NGUYEN, DANIEL | M | 17 | 2018-04-03 | 2846 QUAIL RIDGE ROAD | beat 537 | OPEN "
-record5 = " BOOKER, TERRENCE | M | 41 | 2018-11-08 | 907 n. calloway drive | Beat 442 | OPEN "
+record = " BOOKER, TERRENCE | M | 41 | 2018-11-08 | 907 n. calloway drive | Beat 442 | OPEN "
 
-fields = record.strip()
+fields = record.strip().split('|')
+
+#clean the fields
+name = fields[0].title()
+sex = fields[1].title()
+age = int(fields[2])
+date = fields[3]
+year = int(date[0:5])
+addr = fields[4].title()
+status = fields[6].title()
+
+case_age = 2026 - year
+
+print(f"Name: {name}, Sex: {sex}, Age: {age}, Year: {year}, Address: {addr}, Status: {status}, Case Age: {case_age}" )
+
+
+
+
+
 
