@@ -15,9 +15,9 @@ oldest_year = CURRENT_YEAR   # start high (2026); any real case year will be old
 oldest_name = ""             # paired with oldest_year, updated together
 
 # open() gives us a file object; "with" auto-closes the file when the block ends
-with open(DATA_FILE) as f:
+with open(DATA_FILE) as case_file:
     # for loops over the file one line at a time -- one full record per pass
-    for line in f:
+    for line in case_file:
         line = line.strip()   # remove the trailing newline (and any stray spaces)
 
         # Guard clause: an empty line (after stripping) has nothing to parse.
@@ -41,7 +41,7 @@ with open(DATA_FILE) as f:
         status = fields[6].strip().lower()
 
         years_unsolved = CURRENT_YEAR - year
-        total_records = total_records + 1   # one more valid record processed
+        total_records = total_records + 1   # counts every non-blank line; has to come after the skipping the blank line 
 
         # Required output for every record, valid or not otherwise skipped above
         print(f"{name}: {years_unsolved} years")
@@ -67,7 +67,7 @@ with open(DATA_FILE) as f:
 
 # Everything below runs once, AFTER the loop has finished all 50 records --
 # it just prints the accumulators that were built up one line at a time above
-print()
+print() # Prints blank line 
 print(f"Total records:        {total_records}")
 print(f"Open cases:           {open_count}")
 print(f"Stale (>= {STALE_YEARS} yrs):     {stale_count}")
