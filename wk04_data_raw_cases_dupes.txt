@@ -1,0 +1,60 @@
+  PALACIOS, GLORIA | m | 25 | 2015-12-21 | 1573 illinois avenue | beat 442 | OPEN  
+  NGUYEN, PATRICE|f|25|1992-09-01|1838 lawrence street|Beat 537|CLOSED
+    TRAMMELL, JAMAL | m | 33 | 2025-04-05 | 4248 creek cove drive | beat 537 | open  
+  WHITFIELD, FELIX | f | 39 | 1999-07-23 | 3404 FOREST LANE | beat 623 | CLOSED  
+    ESCOBAR, ANGELA|m|26|1994-01-12|5088 ledbetter drive|beat 326|OPEN
+KIRKLAND, LAMAR | m | 57 | 2020-08-16 | 7184 JIM MILLER ROAD | beat 518 | CLOSED
+  BARAJAS, BRENDA | f | 33 | 1997-05-11 | 3214 lawrence street | beat 347 | CLOSED
+WINSLOW, RUBEN | F | 17 | 1985-02-09 | 5449 HASKELL AVENUE | Beat 518 | OPEN
+NGUYEN, VICTOR | F | 26 | 1993-07-08 | 6681 creek cove drive | Beat 214 | open
+  DELGADO, TAMIKA | M | 23 | 2000-11-19 | 7029 gaston avenue | beat 347 | open
+Reyes, Lamar | m | 61 | 1995-07-26 | 482 LEDBETTER DRIVE | beat 341 | open
+  SANDOVAL, OMAR | f | 28 | 2014-09-07 | 3139 scyene road | beat 352 | closed
+Cisneros, Cedric | M | 25 | 2017-01-15 | 3776 buckner boulevard | Beat 352 | CLOSED  
+  ELLISON, TAMIKA | M | 32 | 2011-09-08 | 9632 peavy road | beat 442 | closed
+  Lockett, Carmen | m | 47 | 2002-06-21 | 9201 audelia road | beat 347 | closed  
+VILLANUEVA, LATOYA|M|36|1992-05-16|8825 hampton road|beat 623|closed
+  NGUYEN, PATRICE|f|25|1992-09-01|1838 lawrence street|Beat 537|CLOSED
+SANDOVAL, DEMARCUS | M | 58 | 1987-06-19 | 2956 gaston avenue | beat 214 | Closed
+OSEI, TYRONE|M|47|2019-09-01|291 hampton road|beat 537|OPEN
+WHITFIELD, TASHA | M | 38 | 1993-11-03 | 5524 peavy road | Beat 442 | OPEN  
+MERCADO, LAMAR|M|19|2023-10-21|760 BRUTON ROAD|beat 341|OPEN
+  DELGADO, MONICA|M|37|2004-11-15|3522 FOREST LANE|beat 347|OPEN
+WINSLOW, RUBEN | F | 17 | 1985-02-09 | 5449 HASKELL AVENUE | Beat 518 | OPEN
+  MERCADO, GLORIA|m|31|2018-01-17|8479 creek cove drive|Beat 352|OPEN  
+  PRUITT, VICTOR | F | 20 | 1995-05-22 | 5632 fatima avenue | beat 326 | CLOSED  
+    Ellison, Omar | m | 53 | 2018-10-01 | 2789 forest lane | Beat 347 | Closed
+    VILLANUEVA, RUBEN | f | 19 | 1981-08-11 | 7051 gaston avenue | beat 731 | Open  
+  Navarro, Monica | m | 37 | 1987-11-28 | 2944 buckner boulevard | Beat 347 | Open  
+Escobar, Samuel | M | 56 | 2021-01-10 | 2052 LANCASTER ROAD | beat 255 | CLOSED  
+    Mercado, Lamar | M | 28 | 1980-02-02 | 6558 FATIMA AVENUE | beat 623 | open  
+  ASHFORD, ISAIAH | m | 45 | 2008-11-11 | 9424 gaston avenue | beat 731 | Closed  
+  Carter, Cedric | f | 50 | 2007-11-20 | 4958 KIEST BOULEVARD | beat 731 | Closed
+CARTER, JORGE | M | 45 | 2001-09-11 | 8838 illinois avenue | Beat 455 | open
+    NAVARRO, TYRONE | M | 62 | 1986-01-20 | 2580 fatima avenue | beat 341 | CLOSED
+OKAFOR, ANGELA | M | 61 | 2024-11-07 | 6658 CREEK COVE DRIVE | beat 341 | CLOSED  
+  Ashford, Gloria | m | 63 | 2008-02-01 | 2741 gaston avenue | Beat 518 | Open
+  MERCADO, TERRENCE|m|24|2018-10-06|1863 LAWRENCE STREET|beat 518|Closed
+    ELLISON, ANDRE | M | 63 | 2010-07-05 | 2850 bruton road | Beat 326 | OPEN  
+  FUENTES, ALICIA | m | 34 | 1997-05-08 | 5813 GASTON AVENUE | beat 731 | OPEN  
+  REYES, RICO | M | 58 | 1986-06-24 | 8603 forest lane | beat 731 | OPEN  
+Delgado, Brenda|M|70|1982-07-24|3741 bruton road|beat 623|Open  
+  CISNEROS, BRANDON | M | 26 | 2012-07-16 | 5967 ledbetter drive | beat 731 | OPEN
+  DUPREE, DEMARCUS | m | 60 | 2006-10-03 | 9244 jim miller road | beat 347 | CLOSED
+OSEI, TYRONE|M|47|2019-09-01|291 hampton road|beat 537|OPEN
+VILLANUEVA, TASHA|M|38|1981-09-01|6575 PEAVY ROAD|Beat 623|OPEN
+  CISNEROS, DENISE | M | 26 | 2001-04-13 | 9030 SCYENE ROAD | Beat 341 | OPEN  
+  KIRKLAND, LAMAR | M | 66 | 2008-09-15 | 7748 marsalis avenue | beat 518 | open  
+  PALACIOS, WANDA | m | 30 | 2016-09-25 | 4952 gaston avenue | Beat 518 | OPEN
+LOCKETT, ELENA | m | 35 | 2024-01-12 | 1658 jim miller road | Beat 442 | open
+  MERCADO, GLORIA|m|31|2018-01-17|8479 creek cove drive|Beat 352|OPEN  
+  Fuentes, Alicia|F|27|1995-08-25|4086 scyene road|beat 214|OPEN
+Nguyen, Terrence | m | 25 | 1986-03-01 | 4705 HASKELL AVENUE | beat 352 | closed
+    TRAMMELL, JAMAL | m | 33 | 2025-04-05 | 4248 creek cove drive | beat 537 | open  
+MERCADO, CARMEN | M | 51 | 2010-12-02 | 5612 lawrence street | Beat 255 | OPEN
+Nguyen, Marcus|m|25|1985-06-15|9843 military parkway|Beat 537|open
+Reyes, Lamar | m | 61 | 1995-07-26 | 482 LEDBETTER DRIVE | beat 341 | open
+    WHITFIELD, DENISE|m|24|2005-11-26|9833 gaston avenue|beat 255|CLOSED
+RENFRO, DANIEL | F | 49 | 2022-08-07 | 324 lancaster road | beat 731 | CLOSED
+Cisneros, Cedric | M | 25 | 2017-01-15 | 3776 buckner boulevard | Beat 352 | CLOSED  
+  DELGADO, MONICA|M|37|2004-11-15|3522 FOREST LANE|beat 347|OPEN
