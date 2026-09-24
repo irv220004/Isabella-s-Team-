@@ -5,10 +5,10 @@
 #   Lines in file: 60 | Unique records: 52 | Duplicates removed: 8
 #   Youngest 17 / Oldest 70 / Average 39.1 | beat ranking with # bars
 
-DATA_FILE = input("Enter the file name with extension (.txt, .csv, etc.) for deduping: ")      #file selection for deduping
+data_file = input("Enter the file name with extension (.txt, .csv, etc.) for deduping: ")      #file selection for deduping
 
 # --- Step 1/2: read the file and normalize every line into a list ---
-data_file = open(DATA_FILE, "r", encoding="utf-8")  # open the raw evidence file
+data_file = open(data_file, "r", encoding="utf-8")  # open the raw evidence file
 raw_lines = data_file.readlines()   # read every physical line into a list
 data_file.close()                   # close the file once its contents are in memory
 
