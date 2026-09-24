@@ -5,19 +5,19 @@
 
 from datetime import datetime
 
-STALE_YEARS = 5              # threshold (in years) for a case to count as "stale"
-CURRENT_YEAR = datetime.now().year
-DATA_FILE = input("Enter the file name with extension (.txt, .csv, etc.) for filtering: ")
+stale_years = 5              # threshold (in years) for a case to count as "stale"
+current_year = datetime.now().year
+datal_file = input("Enter the file name with extension (.txt, .csv, etc.) for filtering: ")
 
 # --- Step 4 setup: accumulators are created BEFORE the loop starts (slide 7) ---
 total_records = 0            # counts every valid record we process
 open_count = 0                # counts records whose status is OPEN
 stale_count = 0                # counts OPEN records that are also stale (5+ yrs)
 juvenile_open_count = 0        # counts OPEN records where the victim is under 18
-oldest_open_year = CURRENT_YEAR   # start high so the first OPEN case always wins
+oldest_open_year = current_year   # start high so the first OPEN case always wins
 oldest_open_name = ""              # will hold the name tied to oldest_open_year
 
-data_file = open(DATA_FILE, "r", encoding="utf-8")  # open the raw evidence file
+data_file = open(datal_file, "r", encoding="utf-8")  # open the raw evidence file
 lines = data_file.readlines()  # read every line into a list so we can loop over it
 data_file.close()              # close the file now that its contents are in memory
 
@@ -48,10 +48,10 @@ for raw_line in lines:                 # for loop: same 4-5 lines run once per r
     age = int(age_text)                # convert the cleaned age string to a number
     year = int(date_text[0:4])         # first 4 characters of the date are the year
 
-    years_unsolved = CURRENT_YEAR - year   # slide 4: how long the case has been open
+    years_unsolved = current_year - year   # slide 4: how long the case has been open
 
     # --- Step 3: if/elif/else flagging logic (slide 4) ---
-    if years_unsolved >= STALE_YEARS:      # most specific/important condition first
+    if years_unsolved >= stale_years:      # most specific/important condition first
         flag = "*** STALE ***"             # case is old enough to flag as stale
     elif years_unsolved >= 2:              # only checked if the STALE test was False
         flag = "aging"                     # not stale yet, but not brand new either
@@ -60,7 +60,7 @@ for raw_line in lines:                 # for loop: same 4-5 lines run once per r
 
     # only cases that are OPEN and stale get the loud "*** STALE ***" flag text
     stale_flag_text = ""                        # default: nothing extra to print
-    if status == "OPEN" and years_unsolved >= STALE_YEARS:   # slide 4's example check
+    if status == "OPEN" and years_unsolved >= stale_years:   # slide 4's example check
         stale_flag_text = "  *** STALE ***"      # attach the flag for open+stale cases
 
     print(f"{name}: {years_unsolved} years unsolved [{status}]{stale_flag_text}")
@@ -74,7 +74,7 @@ for raw_line in lines:                 # for loop: same 4-5 lines run once per r
     if status == "OPEN":                    # only run the OPEN-specific accumulators
         open_count = open_count + 1              # tally another open case
 
-        if years_unsolved >= STALE_YEARS:        # step 3: stale OPEN cases
+        if years_unsolved >= stale_years:        # step 3: stale OPEN cases
             stale_count = stale_count + 1            # tally another stale-open case
 
         if age < 18:                              # step 3: juvenile victims
@@ -92,5 +92,5 @@ print()                                     # another blank line before the fina
 # This block matches the exact format required on slide 13's "Results To Achieve"
 print(f"Total records:        {total_records}")
 print(f"Open cases:           {open_count}")
-print(f"Stale (>= {STALE_YEARS} yrs):     {stale_count}")
+print(f"Stale (>= {stale_years} yrs):     {stale_count}")
 print(f"Oldest open case:     {oldest_open_name} ({oldest_open_year})")
