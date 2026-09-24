@@ -1,10 +1,10 @@
 # first_filter.py -- ITSS/OPRE 3312, Week 3: The First Filter
-# Author: MXH240023
+# Author: Mustafa Hasnain MXH240023
 # Sweep all 50 records, flag what matters, find the oldest open case.
 # Week 2 = 5 copies of the pipeline. Week 3 = 1 copy inside a loop.
 
-STALE_YEARS = 5      # slide 14 stretch: try 3, 5, 10 and watch the stale count move
-THIS_YEAR = 2026
+stale_years = 5      # slide 14 stretch: try 3, 5, 10 and watch the stale count move
+this_year = 2026
 
 # ACCUMULATORS -- set up BEFORE the loop, update INSIDE it, report AFTER (slide 7).
 # Put these inside the loop by mistake and they reset on every record.
@@ -35,7 +35,7 @@ with open("wk03_data_raw_cases_50.txt", "r") as file:
         beat = fields[5].strip().title()
         status = fields[6].strip().upper()      # "open"/"Open"/"OPEN" all become "OPEN"
 
-        years_unsolved = THIS_YEAR - year
+        years_unsolved = this_year - year
         total_records = total_records + 1
 
         # == asks a question, = makes an assignment (slide 5).
@@ -45,7 +45,7 @@ with open("wk03_data_raw_cases_50.txt", "r") as file:
 
             # Nested if: this is only asked about OPEN cases, since it sits inside
             # the block above.
-            if years_unsolved >= STALE_YEARS:
+            if years_unsolved >= stale_years:
                 stale_count = stale_count + 1
                 flag = "*** STALE ***"
             else:
@@ -70,6 +70,6 @@ with open("wk03_data_raw_cases_50.txt", "r") as file:
 print()
 print(f"Total records:        {total_records}")
 print(f"Open cases:           {open_count}")
-print(f"Stale (>= {STALE_YEARS} yrs):     {stale_count}")
+print(f"Stale (>= {stale_years} yrs):     {stale_count}")
 print(f"Oldest open case:     {oldest_name} ({oldest_year})")
 print(f"Juveniles (age < 18): {juvenile_count}")
