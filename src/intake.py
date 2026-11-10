@@ -34,10 +34,10 @@ def clean_case_id(raw):
 
 def clean_name(raw):
     """Collapse whitespace and title-case a 'Last, Initial' name."""
-    return " ".join(raw.strip().split()).title()
-    # raw.strip() removes outer spaces; .split() breaks on any run of whitespace
-    # and throws away the empty pieces; " ".join(...) glues the pieces back with
-    # exactly one space; .title() capitalizes the first letter of each word
+    stripped = raw.strip()                        # remove the outer spaces, e.g. "  JORDAN,  C " -> "JORDAN,  C"
+    words = stripped.split()                       # split on ANY run of whitespace, dropping empty pieces
+    collapsed = " ".join(words)                     # glue the words back with exactly one space between them
+    return collapsed.title()                        # capitalize the first letter of each word: "Jordan, C"
 
 
 def clean_sex(raw):
@@ -176,10 +176,10 @@ def write_quarantine_csv(quarantine_rows, path="quarantine.csv"):
 def raw_closed_rate(path):
     """The naive clearance rate: raw rows where status is exactly 'CLOSED', no cleaning at all."""
     total = closed = 0                             # two counters, both starting at 0
-    with open(path, newline="", encoding="utf-8") as f:
-        reader = csv.reader(f)
+    with open(path, newline="", encoding="utf-8") as f:   # open the raw file for a second, separate pass
+        reader = csv.reader(f)                        # same csv.reader as load_cases uses
         header = next(reader)                        # skip the header line again, same as load_cases
-        for row in reader:
+        for row in reader:                            # walk every remaining row
             if not row or row == header:              # skip blanks and repeated headers here too
                 continue
             total += 1                                # count every real raw row, cleaned or not
@@ -197,54 +197,54 @@ def build_report(cases, stats, raw_path):
     lines = ["=" * 60, "COLD CASE FILE - CLEANING REPORT", "=" * 60]   # build the report as a list of text lines
 
     lines.append("\n1. INTAKE")                                   # \n adds a blank line before this section
-    lines.append(f"  Raw data rows read:         {stats['rows_read']}")
-    lines.append(f"  Blank/header rows skipped:  {stats['blank_or_header_skipped']}")
-    lines.append(f"  Rows quarantined:           {stats['quarantined']}")
+    lines.append(f"  Raw data rows read:         {stats['rows_read']}")              # how many real data rows existed
+    lines.append(f"  Blank/header rows skipped:  {stats['blank_or_header_skipped']}")  # blanks + repeated headers
+    lines.append(f"  Rows quarantined:           {stats['quarantined']}")            # total rejected rows
     for reason, count in stats["quarantine_reasons"].most_common():   # most_common() sorts biggest count first
-        lines.append(f"      - {reason}: {count}")
-    lines.append(f"  Duplicate case_ids removed: {stats['duplicates']}")
-    lines.append(f"  Clean cases:                {stats['clean_cases']}")
+        lines.append(f"      - {reason}: {count}")                     # one line per distinct rejection reason
+    lines.append(f"  Duplicate case_ids removed: {stats['duplicates']}")  # rows dropped as repeats
+    lines.append(f"  Clean cases:                {stats['clean_cases']}")  # how many cases actually survived
 
-    lines.append("\n2. CLEARANCE")
+    lines.append("\n2. CLEARANCE")                                      # start the clearance section
     lines.append(f"  Overall clearance rate: {overall_rate:.1%}")     # :.1% formats 0.622 as "62.2%"
     by_decade = {}                                                     # dict: decade -> [closed_count, total_count]
     for c in cases:                                                    # one pass over every clean case
         decade = (c.year // 10) * 10                                  # e.g. 1994 -> 1990 (integer division trick)
         by_decade.setdefault(decade, [0, 0])                          # setdefault creates [0, 0] the first time
         by_decade[decade][1] += 1                                      # bump that decade's total count
-        if c.status == "CLOSED":
+        if c.status == "CLOSED":                                       # only count closed cases toward "closed"
             by_decade[decade][0] += 1                                  # bump that decade's closed count too
     for decade in sorted(by_decade):                                   # sorted() so decades print oldest-first
-        closed_n, total_n = by_decade[decade]
-        rate = closed_n / total_n if total_n else 0.0
-        lines.append(f"      {decade}s: {rate:.1%} ({closed_n}/{total_n})")
+        closed_n, total_n = by_decade[decade]                           # unpack this decade's [closed, total] pair
+        rate = closed_n / total_n if total_n else 0.0                   # that decade's own clearance rate
+        lines.append(f"      {decade}s: {rate:.1%} ({closed_n}/{total_n})")  # print the decade's line
 
-    lines.append("\n3. OPEN CASES")
+    lines.append("\n3. OPEN CASES")                                     # start the open-cases section
     stale = [c for c in open_cases if c.is_stale]                      # every open case that's 5+ years old
-    lines.append(f"  Stale open cases (5+ years): {len(stale)}")
-    lines.append("  5 oldest open cases:")
+    lines.append(f"  Stale open cases (5+ years): {len(stale)}")       # how many open cases are stale
+    lines.append("  5 oldest open cases:")                              # header line for the list below
     for c in sorted(open_cases, key=lambda c: c.incident_date)[:5]:    # sort oldest-first, keep only the first 5
-        lines.append(f"      {c.case_id}  {c.victim_name}  {c.incident_date.isoformat()}"
-                      f"  ({c.years_unsolved} yrs unsolved)")
+        lines.append(f"      {c.case_id}  {c.victim_name}  {c.incident_date.isoformat()}"  # id, name, date
+                      f"  ({c.years_unsolved} yrs unsolved)")            # how long it's been open
 
-    lines.append("\n4. BEATS")
+    lines.append("\n4. BEATS")                                          # start the beats section
     open_beat_counts = Counter(c.beat for c in open_cases if c.beat)   # counts open cases per beat, skips blank beats
-    lines.append("  Top 10 beats by open-case count:")
+    lines.append("  Top 10 beats by open-case count:")                  # header line for the table below
     for beat, open_count in open_beat_counts.most_common(10):          # the 10 beats with the most open cases
         beat_cases = [c for c in cases if c.beat == beat]               # every clean case (open or closed) in this beat
-        beat_closed = [c for c in beat_cases if c.status == "CLOSED"]
-        beat_rate = len(beat_closed) / len(beat_cases) if beat_cases else 0.0
-        lines.append(f"      Beat {beat}: {open_count} open, clearance rate {beat_rate:.1%}")
+        beat_closed = [c for c in beat_cases if c.status == "CLOSED"]   # just the closed ones in this beat
+        beat_rate = len(beat_closed) / len(beat_cases) if beat_cases else 0.0  # this beat's own clearance rate
+        lines.append(f"      Beat {beat}: {open_count} open, clearance rate {beat_rate:.1%}")  # print the beat's line
 
-    lines.append("\n5. LEADS")
+    lines.append("\n5. LEADS")                                          # start the leads section
     with_phone = [c for c in open_cases if c.callback_phone]           # open cases where a phone was extracted
-    leads_pct = len(with_phone) / len(open_cases) if open_cases else 0.0
-    lines.append(f"  Open cases with a callback phone in tip notes: {leads_pct:.1%}")
+    leads_pct = len(with_phone) / len(open_cases) if open_cases else 0.0  # % of open cases with a usable lead
+    lines.append(f"  Open cases with a callback phone in tip notes: {leads_pct:.1%}")  # print that percentage
 
-    lines.append("\n6. RAW VS CLEAN")
+    lines.append("\n6. RAW VS CLEAN")                                   # start the raw-vs-clean section
     raw_rate = raw_closed_rate(raw_path)                                # re-scan the raw file with no cleaning
-    lines.append(f"  Raw status==CLOSED rate (no cleaning): {raw_rate:.1%}")
-    lines.append(f"  Cleaned clearance rate:                {overall_rate:.1%}")
+    lines.append(f"  Raw status==CLOSED rate (no cleaning): {raw_rate:.1%}")  # the naive, uncleaned rate
+    lines.append(f"  Cleaned clearance rate:                {overall_rate:.1%}")  # the real, cleaned rate
     lines.append(f"  Difference:                            {overall_rate - raw_rate:+.1%}")   # +.1% shows the sign
 
     return "\n".join(lines)                                             # glue every line together with newlines
